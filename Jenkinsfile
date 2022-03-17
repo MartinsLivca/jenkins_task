@@ -1,0 +1,22 @@
+pipeline {
+     agent any
+     stages {
+         stage('Build') {
+             steps {
+                 sh 'echo "Seems to be working"'
+                 sh '''
+                     echo "Multiline shell steps works too"
+                     ls -lah
+                 '''
+             }
+         }      
+         stage('Upload to AWS') {
+              steps {
+                  withAWS(region:'eu-west-1',credentials:'816952374684') {
+                  sh 'echo "Uploading content with AWS creds"'
+                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'fisrt-stack.yaml', bucket:'jenkins_s3_task_ml')
+                  }
+              }
+         }
+     }
+}
