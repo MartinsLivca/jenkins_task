@@ -2,7 +2,7 @@
 AWSTemplateFormatVersion: "2010-09-09"
 
 Description: CF template to create the first security group
-//edit
+//comment
 Parameters:
   OwnerName:
     Type: String
