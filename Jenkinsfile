@@ -26,12 +26,18 @@ pipeline {
                       s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'first-stack.yaml', bucket:'jenkinss3taskml')
                   }
             } else {
+                withCredentials([gitUsernamePassword(credentialsId: '82b12ddf-6f32-4838-ba57-c2ff87cbda1e', gitToolName: 'Default')]) {
                 sh '''
-                git branch reverted
-                git pull
-                git branch reverted HEAD~1
-
+                git checkout main
+                git pull origin main
+                git branch reverted HEAD~2
+                git checkout reverted first-stack.yaml
+                git add .
+                git commit -m "reverted yaml file"
+                git branch -d reverted
+                git push 
                 '''
+            }
             }
         }
     }
