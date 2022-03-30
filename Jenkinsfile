@@ -27,6 +27,8 @@ pipeline {
                   }
             } else {
                 sh '''
+                git branch reverted
+                git pull
                 git branch reverted HEAD~1
 
                 '''
