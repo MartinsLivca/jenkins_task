@@ -32,10 +32,6 @@ pipeline {
                 git pull origin main
                 git branch -d reverted
                 git branch reverted HEAD~2
-                git checkout reverted
-                git add .
-                git commit -a -m "yes"
-                git checkout main
                 git merge reverted -m "yes"
                 git branch -d reverted
                 git push
