@@ -31,9 +31,10 @@ pipeline {
                 git checkout main
                 git pull origin main
                 git branch reverted HEAD~2
-                git merge reverted -m "yes"
+                git checkout reverted first-stack.yaml
+                git add .
+                git commit -m "reverted yaml file"
                 git branch -d reverted
-                git commit -am "Updated version number"
                 git push 
                 '''
             }
