@@ -33,8 +33,8 @@ pipeline {
                 git branch reverted HEAD~2
                 git merge reverted -m "yes"
                 git branch -d reverted
-                git commit -am "Updated version number: ${env.BUILD_NUMBER}
-
+                git commit -am "Updated version number"
+                git push 
                 '''
             }
             }
