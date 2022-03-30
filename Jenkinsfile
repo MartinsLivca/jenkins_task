@@ -28,22 +28,14 @@ pipeline {
             } else {
                 withCredentials([gitUsernamePassword(credentialsId: '82b12ddf-6f32-4838-ba57-c2ff87cbda1e', gitToolName: 'Default')]) {
                 sh '''
-                git checkout main
-                git pull
-                git add .
-                git branch reverted HEAD~10
-                 git add .
-                git commit -a -m "yes"
-                 git add .
-                git merge reverted -m "yes"
-                 git add .
-                git commit -a -m "yes"
-                 git add .
                 git branch -d reverted
-                 git add .
+                git checkout main
+                git branch reverted HEAD~1
+                git merge reverted -m "yes"
                 git commit -a -m "yes"
-                 git add .
-                git push
+                git push --set-upstream origin main
+                git branch -d reverted
+
                 '''
             }
             }
