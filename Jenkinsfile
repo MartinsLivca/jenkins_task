@@ -7,7 +7,7 @@ pipeline {
                 echo 'Building..'
             }
         }
-        stage('Deploy') {
+         stage('Deploy') {
             steps {
                   withAWS(region:'eu-west-1',credentials:'816952374684') {
                   sh 'echo "Uploading content with AWS creds"'
