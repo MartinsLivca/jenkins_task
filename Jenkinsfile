@@ -38,7 +38,7 @@ pipeline {
                 git checkout main
                 git merge reverted -m "yes"
                 git branch -d reverted
-                git push --set-upstream origin main
+                git push
 
                 '''
             }
