@@ -1,4 +1,4 @@
-........................pipeline {
+pipeline {
      agent any
      stages {
          stage('Build') {
@@ -30,14 +30,11 @@
                 sh '''
                 git checkout main
                 git pull origin main
-                git branch -d reverted
                 git branch reverted HEAD~2
-                git checkout reverted
-                git add .
-                git commit -a -m "yes"
                 git merge reverted -m "yes"
-                git push --force --set-upstream  origin main
                 git branch -d reverted
+                
+                git push --force
 
                 '''
             }
