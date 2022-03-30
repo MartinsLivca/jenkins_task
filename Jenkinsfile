@@ -14,6 +14,8 @@
                       s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'first-stack.yaml', bucket:'jenkinss3taskml')
             }
         }
-    }
+     }
 }
-}
+    
+
+
