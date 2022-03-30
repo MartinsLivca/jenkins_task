@@ -1,7 +1,5 @@
 pipeline {
     agent any
-    triggers {
-     pullRequestReview(reviewStates: ['approved'])
     }
     stages {
         stage('Build') {
