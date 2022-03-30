@@ -9,6 +9,7 @@ pipeline {
          stage('Upload to AWS') {
               steps {
                   script {
+            // Define Variable
              def USER_INPUT = input(
                     message: 'Upload to S3 Bucket?',
                     parameters: [
@@ -26,26 +27,7 @@ pipeline {
                       s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'first-stack.yaml', bucket:'jenkinss3taskml')
                   }
             } else {
-                withCredentials([gitUsernamePassword(credentialsId: '82b12ddf-6f32-4838-ba57-c2ff87cbda1e', gitToolName: 'Default')]) {
-                sh '''
-                git checkout main
-                git pull
-                git add .
-                git branch reverted HEAD~10
-                 git add .
-                git commit -a -m "yes"
-                 git add .
-                git merge reverted -m "yes"
-                 git add .
-                git commit -a -m "yes"
-                 git add .
-                git branch -d reverted
-                 git add .
-                git commit -a -m "yes"
-                 git add .
-                git push
-                '''
-            }
+                //do something else
             }
         }
     }
