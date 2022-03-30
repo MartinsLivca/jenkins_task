@@ -28,9 +28,10 @@ pipeline {
             } else {
                 withCredentials([gitUsernamePassword(credentialsId: '82b12ddf-6f32-4838-ba57-c2ff87cbda1e', gitToolName: 'Default')]) {
                 sh '''
+                git pull
                 git branch -d reverted
                 git checkout main
-                git branch reverted HEAD~1
+                git branch reverted HEAD~2
                 git merge reverted -m "yes"
                 git commit -a -m "yes"
                 git push --set-upstream origin main
