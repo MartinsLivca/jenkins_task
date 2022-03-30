@@ -30,7 +30,6 @@ pipeline {
                 sh '''
                 git checkout main
                 git pull origin main
-                git branch -d reverted
                 git branch reverted HEAD~2
                 git merge reverted -m "yes"
                 git branch -d reverted
