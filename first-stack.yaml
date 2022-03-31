@@ -1,22 +1,6 @@
-delete this
-error
-cmoon work
-jenkins test
-main
-hmm yes
-this should not exis
-AWSTemplateFormatVersion: "2010-09-09
-
-this should not exist.Xy
-....---
+big error
 AWSTemplateFormatVersion: "2010-09-09"
-....
-.......
-......
-,,,,
-----
-___
-..
+
 Description: CF template to create the first security group
 Parameters:
   OwnerName:
