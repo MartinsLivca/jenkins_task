@@ -30,7 +30,7 @@ pipeline {
                 sh '''
                 git checkout main
                 git pull origin main
-                git branch reverted HEAD~3
+                git branch reverted HEAD~1
                 git checkout reverted first-stack.yaml
                 git add .
                 git commit -m "reverted yaml file"
