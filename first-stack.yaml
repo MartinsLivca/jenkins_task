@@ -33,6 +33,9 @@ Resources:
           Description: Allows to access Jenkins from anywhere
       VpcId: vpc-0c8bd14fd04d6784d
       Tags:
+        - Key: "CreatedBy"
+          Value:
+            Ref: OwnerName
 
   FirstEC2Instance:
     Type: "AWS::EC2::Instance"
@@ -50,5 +53,8 @@ Resources:
             - Ref: jenkinssg
           SubnetId: "subnet-0d6b2802009fc8c2c"
       Tags:
+        - Key: "CreatedBy"
+          Value:
+            Ref: OwnerName
         - Key: "Name"
           Value: jenkins_task_cf
