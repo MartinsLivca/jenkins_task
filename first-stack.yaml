@@ -1,8 +1,6 @@
-big error
-
 AWSTemplateFormatVersion: "2010-09-09"
 
-Description: CF template to create the first security group
+Description: s3_jenkins_task
 Parameters:
   OwnerName:
     Type: String
@@ -10,13 +8,9 @@ Parameters:
   InstanceTypeParameter:
     Type: String
     Default: t2.micro
-    AllowedValues:
-      - t2.micro
-      - m1.small
-    Description: Enter t2.micro or m1.small. Default is t2.micro as it is included in the Free Tier.
 
 Resources:
-  Jenkins_task:
+  jenkins_sg:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: The first security group
@@ -38,6 +32,10 @@ Resources:
           CidrIp: 0.0.0.0/0
           Description: Allows to access Jenkins from anywhere
       VpcId: vpc-0c8bd14fd04d6784d
+      Tags:
+        - Key: "CreatedBy"
+          Value:
+            Ref: OwnerName
 
   FirstEC2Instance:
     Type: "AWS::EC2::Instance"
@@ -52,9 +50,11 @@ Resources:
           DeleteOnTermination: True
           DeviceIndex: "0"
           GroupSet:
-            - Ref: FirstSG
+            - Ref: jenkins_sg
           SubnetId: "subnet-0d6b2802009fc8c2c"
       Tags:
+        - Key: "CreatedBy"
+          Value:
+            Ref: OwnerName
         - Key: "Name"
           Value: jenkins_task_cf
-
