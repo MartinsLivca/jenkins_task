@@ -57,4 +57,4 @@ Resources:
           Value:
             Ref: OwnerName
         - Key: "Name"
-          Value: jenkins_task_cf
+          Value: jenkins_task_plzwork
