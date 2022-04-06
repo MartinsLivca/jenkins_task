@@ -25,7 +25,7 @@ pipeline {
                   sh 'echo "Uploading content with AWS creds"'
                     s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'first-stack.yaml', bucket:'jenkinss3taskml')
                   
-                    cfnUpdate(stack:'jenkinstask', url:'https://s3.amazonaws.com/jenkinss3taskml/first-stack.yaml')
+                    cfnUpdate(stack:'jenkinstask', url:'https://s3.amazonaws.com/jenkinss3taskml/first-stack.yaml', params:['OwnerName': 'martins'])
                 }
             } else {
                 withCredentials([gitUsernamePassword(credentialsId: '82b12ddf-6f32-4838-ba57-c2ff87cbda1e', gitToolName: 'Default')]) {
