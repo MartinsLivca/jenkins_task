@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: "2010-09-09"
 
-Description: CF template to create the first security group
+Description: s3_jenkins_task
 Parameters:
   OwnerName:
     Type: String
@@ -8,13 +8,9 @@ Parameters:
   InstanceTypeParameter:
     Type: String
     Default: t2.micro
-    AllowedValues:
-      - t2.micro
-      - m1.small
-    Description: Enter t2.micro or m1.small. Default is t2.micro as it is included in the Free Tier.
 
 Resources:
-  FirstSG:
+  jenkins_sg:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: The first security group
@@ -54,30 +50,11 @@ Resources:
           DeleteOnTermination: True
           DeviceIndex: "0"
           GroupSet:
-            - Ref: FirstSG
+            - Ref: jenkins_sg
           SubnetId: "subnet-0d6b2802009fc8c2c"
       Tags:
         - Key: "CreatedBy"
           Value:
             Ref: OwnerName
         - Key: "Name"
-          Value: !Sub "${OwnerName}-cf-instance"
-      UserData:
-        Fn::Base64:
-          !Sub |
-            #!/bin/bash -xe
-            sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat/jenkins.repo
-            sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
-            sudo yum upgrade -y
-            sudo amazon-linux-extras install epel java-openjdk11 -y
-            sudo yum install -y jenkins
-            sudo systemctl daemon-reload
-            sudo systemctl start jenkins
-            sudo systemctl enable jenkins
-
-Outputs:
-  JenkinsUrl:
-    Description: Jenkins URL
-    Value: !Sub
-      - http://${PublicIP}:8080
-      - { PublicIP: !GetAtt FirstEC2Instance.PublicIp}
+          Value: jenkins_task_cf
