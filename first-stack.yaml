@@ -10,7 +10,7 @@ Parameters:
     Default: t2.micro
 
 Resources:
-  jenkins_sg:
+  jenkinssg:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: The first security group
@@ -50,7 +50,7 @@ Resources:
           DeleteOnTermination: True
           DeviceIndex: "0"
           GroupSet:
-            - Ref: jenkins_sg
+            - Ref: jenkinssg
           SubnetId: "subnet-0d6b2802009fc8c2c"
       Tags:
         - Key: "CreatedBy"
