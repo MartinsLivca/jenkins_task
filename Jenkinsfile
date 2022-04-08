@@ -11,7 +11,6 @@ pipeline {
               steps {
                   withAWS(region:'eu-west-1',credentials:'816952374684') {
                   sh 'echo "Uploading content with AWS creds"'
-                    cfnUpdate(stack:'jenkinstask', url:'https://s3.amazonaws.com/jenkinss3taskml/first-stack.yaml', params:['OwnerName': 'martins'])
                   
                   }
                   
@@ -20,7 +19,7 @@ pipeline {
          stage('Update stack'){
              steps{
                  withAWS(region:'eu-west-1',credentials:'816952374684') {
-                    cfnUpdate(stack: 'Jenkins', url: 'https://put-here.s3.eu-west-1.amazonaws.com/first-stack.yaml')
+                    cfnUpdate(stack:'jenkinstask', url:'https://s3.amazonaws.com/jenkinss3taskml/first-stack.yaml', params:['OwnerName': 'martins'])
                  }
              }
          }
