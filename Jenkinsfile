@@ -20,7 +20,7 @@ pipeline {
          stage('Update stack'){
              steps{
                  withAWS(region:'eu-west-1',credentials:'jenkins_credentials') {
-                    cfnUpdate(stack:'jenkinstask', url:'https://s3.amazonaws.com/jenkinss3taskml/first-stack.yaml', params:['OwnerName': 'martins'])
+                    cfnUpdate(stack:'jenkinstask', url:'https://s3.amazonaws.com/jenkinstasks3bucket/first-stack.yaml', params:['OwnerName': 'martins'])
                  }
              }
          }
