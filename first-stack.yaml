@@ -1,61 +1,9 @@
-AWSTemplateFormatVersion: "2010-09-09"
-
-Description: s3_jenkins_task
-Parameters:
-  OwnerName:
-    Type: String
-    Description: martinslivca
-  InstanceTypeParameter:
-    Type: String
-    Default: t2.micro
+AWSTemplateFormatVersion: 2010-09-09
+Description: Part 1 - Build a webapp stack with CloudFormation
 
 Resources:
-  jenkinssg:
-    Type: AWS::EC2::SecurityGroup
+  WebAppInstance:
+    Type: AWS::EC2::Instance
     Properties:
-      GroupDescription: The first security group
-      GroupName: !Sub "${OwnerName}-sg"
-      SecurityGroupEgress:
-        - IpProtocol: tcp
-          FromPort: 0
-          ToPort: 65535
-          CidrIp: 0.0.0.0/0
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 22
-          ToPort: 22
-          CidrIp: 0.0.0.0/0
-          Description: Allows SSH from anywhere
-        - IpProtocol: tcp
-          FromPort: 8080
-          ToPort: 8080
-          CidrIp: 0.0.0.0/0
-          Description: Allows to access Jenkins from anywhere
-      VpcId: vpc-0c8bd14fd04d6784d
-      Tags:
-        - Key: "CreatedBy"
-          Value:
-            Ref: OwnerName
-
-  FirstEC2Instance:
-    Type: "AWS::EC2::Instance"
-    Properties:
-      IamInstanceProfile: "awstaskrole"
-      ImageId: "ami-0ed961fa828560210"
-      KeyName: "cfkeypair"
-      InstanceType:
-        Ref: InstanceTypeParameter
-      NetworkInterfaces:
-        - AssociatePublicIpAddress: True
-          DeleteOnTermination: True
-          DeviceIndex: "0"
-          GroupSet:
-            - Ref: jenkinssg
-          SubnetId: "subnet-0d6b2802009fc8c2c"
-      Tags:
-        - Key: "CreatedBy"
-          Value:
-            Ref: OwnerName
-        - Key: "Name"
-          Value: jenkins_task_working
-          ________
+      ImageId: ami-0a8dc52684ee2fee2 # ImageID valid only in us-east-1 region
+      InstanceType: t2.micro
