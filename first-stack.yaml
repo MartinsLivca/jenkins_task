@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: 2010-09-09
+.XyAWSTemplateFormatVersion: 2010-09-09
 Description: Part 1 - Build a webapp stack with CloudFormation
 
 Resources:
