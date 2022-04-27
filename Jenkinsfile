@@ -35,6 +35,8 @@ pipeline {
         aborted {
             withCredentials([gitUsernamePassword(credentialsId: '82b12ddf-6f32-4838-ba57-c2ff87cbda1e', gitToolName: 'Default')]){
                 sh '''
+                git config --global user.email "jenkins@gmail.com"
+                git config --global user.name "jenkins"
                 git checkout main
                 git pull origin main
                 git branch reverted HEAD~1
@@ -50,3 +52,4 @@ pipeline {
         }
     }
 }
+
