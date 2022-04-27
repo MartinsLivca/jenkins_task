@@ -9,7 +9,7 @@ pipeline {
                
          stage('Upload to AWS') {
               steps {
-                  withAWS(region:'eu-west-1',credentials:'jenkins_credentials') {
+                  withAWS(region:'eu-west-1',credentials:'aws_credentials') {
                   sh 'echo "Uploading content with AWS creds"'
                   s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'first-stack.yaml', bucket:'jenkinstasks3bucket')
                   
@@ -19,7 +19,7 @@ pipeline {
          }
          stage('Update stack'){
              steps{
-                 withAWS(region:'eu-west-1',credentials:'jenkins_credentials') {
+                 withAWS(region:'eu-west-1',credentials:'aws_credentials') {
                     cfnUpdate(stack:'jenkinstask', url:'https://s3.amazonaws.com/jenkinstasks3bucket/first-stack.yaml')
                  }
              }
@@ -33,7 +33,7 @@ pipeline {
             echo 'Complete'
         }
         aborted {
-            withCredentials([gitUsernamePassword(credentialsId: '82b12ddf-6f32-4838-ba57-c2ff87cbda1e', gitToolName: 'Default')]){
+            withCredentials([gitUsernamePassword(credentialsId: 'github_credentials', gitToolName: 'Default')]){
                 sh '''
                 git config --global user.email "jenkins@gmail.com"
                 git config --global user.name "jenkins"
