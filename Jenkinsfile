@@ -30,7 +30,7 @@ pipeline {
      post {
 
         success {
-            echo 'Complete'
+            echo 'The stack has been updated'
         }
         aborted {
             withCredentials([gitUsernamePassword(credentialsId: 'github_credentials', gitToolName: 'Default')]){
@@ -46,6 +46,7 @@ pipeline {
                 git branch -d reverted
                 git push 
                 '''
+            echo 'Commit has been reverted'
             }
  
             
