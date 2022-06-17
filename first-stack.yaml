@@ -1,9 +1,9 @@
-big error AWSTemplateFormatVersion: 2010-09-09
+A..WSTemplateFormatVersion: 2010-09-09
 Description: Part 1 - Build a webapp stack with CloudFormation
 
 Resources:
   WeeeeebApppInstance:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-0a8dc52684ee2fee2 # ImageID valid only in us-east-1 region
+      ImageId: ami-0a8dc52684ee2fee2 
       InstanceType: t2.micro
